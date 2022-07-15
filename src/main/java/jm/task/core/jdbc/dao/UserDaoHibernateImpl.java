@@ -40,7 +40,7 @@ public class UserDaoHibernateImpl implements UserDao {
     public void dropUsersTable() {
         try (Session session = sessionFactory.openSession()) {
             transaction = session.beginTransaction();
-            session.createSQLQuery("DROP TABLE if exists Users").addEntity(User.class).executeUpdate();
+            session.createQuery("DROP TABLE if exists User").executeUpdate();
             transaction.commit();
         } catch (Exception e) {
             e.printStackTrace();
@@ -73,7 +73,7 @@ public class UserDaoHibernateImpl implements UserDao {
     public void removeUserById(long id) {
         try (Session session = sessionFactory.openSession()) {
             transaction = session.beginTransaction();
-            String hql = "DELETE FROM Users WHERE id = :id";
+            String hql = "DELETE FROM User WHERE id = :id";
             session.createQuery(hql).setParameter("id", id).executeUpdate();
             transaction.commit();
         } catch (Exception e) {
